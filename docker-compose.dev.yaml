@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  db:
+    volumes:
+      - ./.mariadb:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    env_file:
+      - .env.development
+  web:
+    env_file:
+      - .env.development
