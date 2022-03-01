@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+  <div class="column column-25 column-offset-50">
+    <%= link_to('Logout', destroy_user_session_path, data: { turbo_method: :delete }, class: "button") %>        
+  </div>
+<% else %>
+  <div class="column column-25 column-offset-75">
+    <%= link_to('Login', new_user_session_path, class: "button") %>  
+  </div>
+<% end %>

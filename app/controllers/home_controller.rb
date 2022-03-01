@@ -1,4 +1,4 @@
 class HomeController < ApplicationController
-  def welcome
-  end
+  skip_before_action :authenticate_user!
+  def welcome; end
 end

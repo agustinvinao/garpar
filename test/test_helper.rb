@@ -1,16 +1,32 @@
-ENV['RAILS_ENV'] ||= 'test'
+require 'simplecov'
+require 'simplecov_json_formatter'
+require 'simplecov-material'
 
+SimpleCov.start :rails do
+  filters.clear
+  add_filter '/app/channels'
+  add_filter '/app/javascripts'
+  add_filter '/app/jobs'
+  add_filter '/app/mailers'
+  
+  minimum_coverage 80
+  formatter SimpleCov::Formatter::MultiFormatter.new([
+                                                       SimpleCov::Formatter::SimpleFormatter,
+                                                       SimpleCov::Formatter::HTMLFormatter,
+                                                       SimpleCov::Formatter::JSONFormatter,
+                                                       SimpleCov::Formatter::MaterialFormatter
+                                                     ])
+end
+
+ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
 
-require 'dotenv'
-Dotenv.load '.env.test.local', ".env.#{Rails.env}"
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  include FactoryBot::Syntax::Methods
 
   # Add more helper methods to be used by all tests here...
 end
