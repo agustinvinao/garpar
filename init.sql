@@ -1,3 +1,5 @@
-CREATE DATABASE IF NOT EXISTS vento;
-CREATE USER IF NOT EXISTS 'garpar'@localhost IDENTIFIED BY 'garpar';
-GRANT ALL PRIVILEGES ON 'users'.* TO 'garpar'@localhost; 
+CREATE DATABASE IF NOT EXISTS garpar;
+CREATE DATABASE IF NOT EXISTS garpar_test;
+CREATE USER IF NOT EXISTS 'garpar'@'%' IDENTIFIED BY 'garpar';
+GRANT ALL PRIVILEGES ON *.* TO 'garpar'@'%'; 
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'; 
