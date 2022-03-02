@@ -1,3 +1,3 @@
 class Address < ApplicationRecord
-  has_many :companies
+  belongs_to :addressable, polymorphic: true
 end

@@ -5,7 +5,6 @@ class CreateCompanies < ActiveRecord::Migration[7.0]
       t.string :vat_number, null: false
       t.string :email
       t.string :phone
-      t.references :address, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
 
       t.timestamps
