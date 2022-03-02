@@ -11,6 +11,7 @@
 inherit_from:
   - ".rubocop-performance.yml"
   - ".rubocop-rails.yml"
+  - ".rubocop-minitest.yml"
 
 require:
   - rubocop-performance
