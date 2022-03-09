@@ -1,3 +1,5 @@
 class Currency < ApplicationRecord
-  validates_presence_of :name, :symbol, :display_decimals
+  validates :name, :symbol, :display_decimals, presence: true
+  has_many :invoice_entries, dependent: :destroy
+  has_many :expense_entries, dependent: :destroy
 end

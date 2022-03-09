@@ -13,15 +13,8 @@
  *= require_tree .
  *= require_self
  */
-.space-top {
-  margin-top: 20px;
-}
-.align-right {
-  text-align: right;
-}
-.align-left {
-  text-align: left;
-}
-.align-center {
-  text-align: center;
+// @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
+.backguard {
+  background-color: #333;
+  color: white;
 }

@@ -1,0 +1,8 @@
+  <%= render "links", items: client_period_years(@client) %>
+  <%= render "links", items: client_periods_year_months(@client, @selected_year) if @selected_year %>
+  <%= render "links", items: client_periods_year_month(@client, @selected_year, @selected_month) if @selected_year && @selected_month %>
+<% if @periods %>
+  <% @periods.each do |period| %>
+    <%= period.due %>
+  <% end %>
+<% end %>

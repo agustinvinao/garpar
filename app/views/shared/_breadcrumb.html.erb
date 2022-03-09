@@ -1,0 +1,11 @@
+<section class="hero is-small">
+  <div class="hero-body">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <% @breadcrums.each do |breadcrum| %>
+          <li><%= link_to "#{breadcrum[:title]}", breadcrum[:path], class: "#{ 'is-active' if breadcrum[:current] }" %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</section>

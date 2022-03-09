@@ -1,0 +1,39 @@
+<div class="columns">
+  <div class="column has-text-centered backguard">due</div>
+  <div class="column has-text-centered backguard">net invoice</div>
+  <div class="column has-text-centered backguard">vat invoice</div>
+  <div class="column has-text-centered backguard">total expenses</div>
+</div>
+<div class="columns">
+  <div class="column has-text-centered"><%= @period.due %></div>
+  <div class="column has-text-centered">
+    <%= link_to amount_with_currency(@period, total_period_net(@period)),
+                user_company_client_period_invoice_path(current_user, @company, @client, @period), target: "_blank" %>
+  </div>
+  <div class="column has-text-centered">
+    <%= link_to amount_with_currency(@period, total_period_vat(@period)),
+                user_company_client_period_invoice_path(current_user, @company, @client, @period), target: "_blank" %>
+  </div>
+  <div class="column has-text-centered">
+    <%= link_to amount_with_currency(@period, total_period_expenses(@period)),
+        user_company_client_period_expense_path(current_user, @company, @client, @period), target: "_blank" %>
+  </div>
+</div>
+
+<br/>
+
+<% if @period.invoice_entries.size > 0 %>
+  <div class="columns">
+    <div class="column has-text-centered backguard">invoice</div>
+  </div>
+
+  <%= render 'invoice_entries', items: @period.invoice_entries %>
+<% end %>
+
+<% if @period.expense_entries.size > 0 %>
+  <div class="columns">
+    <div class="column has-text-centered backguard">expenses</div>
+  </div>
+
+  <%= render 'expense_entries', items: @period.expense_entries if @period.expense_entries %>
+<% end %>

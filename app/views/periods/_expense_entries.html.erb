@@ -1,0 +1,23 @@
+<table class="table is-hoverable is-fullwidth">
+  <thead>
+    <tr>
+      <th>description</th>
+      <th>claim percentage</th>
+      <th>amount</th>
+      <th>claim</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% items.each do |item| %>
+      <tr>
+        <td><%= item.description %></td>
+        <td class="has-text-centered"><%= number_to_percentage(item.claim_percentage, precision: 2) %></td>
+        <td class="has-text-right"><%= number_to_currency(item.amount, precision: item.currency.display_decimals, unit: item.currency.symbol) %></td>
+        <td class="has-text-right">
+          <%= number_to_currency((item.amount * item.claim_percentage).to_f / 100, precision: item.currency.display_decimals, unit: item.currency.symbol) %>
+        </td>
+      </tr>
+    <% end %>
+    
+  </tbody>
+</table>

@@ -1,6 +1,8 @@
+require 'breadcrumb'
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :store_user_location!, if: :storable_location?
+  before_action :breadcrum
 
   private
 
@@ -25,5 +27,24 @@ class ApplicationController < ActionController::Base
 
   def after_sign_out_path_for(_resource_or_scope)
     root_path
+  end
+
+  def breadcrum
+    @breadcrums = []
+    if current_user
+      add_breadcrum('Companies', user_companies_path(current_user),
+                    controller_name == 'companies' && action_name == 'index'
+      )
+    else
+      add_breadcrum('Home', root_path, false)
+    end
+  end
+
+  def add_breadcrum(title, path, current)
+    @breadcrums << {
+      title: title,
+      path: path,
+      current: current
+    }
   end
 end

@@ -1,0 +1,24 @@
+<div class="columns is-size-7">
+  <div class="column">
+    <%= image_tag "logo-transparente.png" %>
+  </div>
+  <div class="column load-left">
+    <dl>
+      <dt>Apartment <%= company.address.apartment %></dt>
+      <dt><%= company.address.line1 %></dt>
+      <dt><%= company.address.line2 %></dt>
+      <dt><%= company.address.postal_code %></dt>
+      <dt><%= company.address.state %></dt>
+      <dt><%= company.address.country %></dt>
+    </dl>
+  </div>
+  <div class="column">
+    <dl>
+      <dt><%= company.name %></dt>
+      <dt><%= company.email %></dt>
+      <dt><%= company.phone %></dt>
+    </dl>
+  </div>
+</div>
+
+<hr/>

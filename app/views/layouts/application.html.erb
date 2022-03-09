@@ -9,30 +9,38 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-
-    <!-- CSS Reset -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-
-    <!-- Milligram CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
-
     <!-- You should properly set the path from the main file. -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma-rtl.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   </head>
 
   <body>
-    <div class="container"> 
+    <div class="container is-fluid">
 
-      <div class="row space-top">
-        <%= render 'users/info' %>
-        <%= render 'users/login_items' %>
+      <nav class="level">
+        <div class="level-left"><div class="level-item"><%= render 'users/info' %></div></div>
+        <div class="level-right"><div class="level-item"><%= render 'users/login_items' %></div></div>
       </div>
       
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <% if notice %>
+        <div class="notification is-primary"><%= notice %></div>
+      <% end %>
+      <% if alert %>
+        <div class="notification is-danger"><%= alert %></div>
+      <% end %>
 
-      <%= yield %>
+      <%= render 'shared/breadcrumb' %>
+      
+      <section class="hero is-small">
+        <div class="hero-body">
+
+          <%= yield %>
+
+        </div>
+      </div>
+      
     </div>
   </body>
 </html>

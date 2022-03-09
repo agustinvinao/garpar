@@ -1,0 +1,8 @@
+<div class="buttons">
+  <% @company.clients.each do |client| %>
+    <%= link_to client.name, user_company_client_path(
+      current_user, @company, client
+    ), class: "button is-small" %>
+  <% end %>
+</div>
+<div class="is-clearfix"></div>

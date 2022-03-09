@@ -19,6 +19,9 @@ Things you may want to cover:
 
 ```
 docker-compose -f docker-compose.yaml -f docker-compose.test.yaml exec web bundle exec rails test
+
+docker-compose run -e "RAILS_ENV=test" test bundle exec rails test
+docker-compose run -e "RAILS_ENV=test" test bundle exec rails db:drop
 ```
 
 - Services (job queues, cache servers, search engines, etc.)
@@ -61,3 +64,7 @@ https://minitest.rubystyle.guide/
 | Assert_nil(Object, Msg = Nil) | Fails Unless Object Is Nil. |
 | Assert_raises(Exception_class, Msg) Do ... End | Fails Unless Block Raises An Exception Of Type Exception_class. |
 | Assert_respond_to(Object, Method, Msg = Nil) | Fails Unless Object Responds To A Method Named Method. |
+
+https://dev.to/arturt/how-to-run-minitest-parallel-tests-on-github-actions-bmd
+
+https://wasabigeek.com/blog/mocking-in-rspec-and-minitest-cheatsheat/

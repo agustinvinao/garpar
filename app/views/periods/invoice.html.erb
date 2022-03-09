@@ -1,0 +1,158 @@
+<div class="container">
+  <%= render "doc_header", company: @company %>
+  <div class="columns shadow-bg is-size-7">
+    <div class="column">
+      <dl>
+        <dt>Billing To</dt>
+        <dt><%= @client.name %></dt>
+        <dt><%= @client.address.line1 %></dt>
+        <dt><%= @client.address.line2 %></dt>
+        <dt><%= @client.address.postal_code %></dt>
+        <dt><%= @client.address.state %></dt>
+        <dt><%= @client.address.country %></dt>
+      </dl>
+    </div>
+    <div class="column">
+      <dl>
+        <dt>Identification</dt>
+        <dt>Vat Number: <%= @client.company.vat_number %></dt>
+        <dt>Invoice Date: <%= @period.due %></dt>
+      </dl>
+    </div>
+    <div class="column">
+      <div class="has-text-centered is-size-3">
+        <%= amount_with_currency(@period, total_period_invoice(@period)) %>
+      </div>
+    </div>
+  </div>
+
+  <br/>
+
+  <table class="table is-striped is-fullwidth is-size-7">
+    <thead>
+      <tr>
+        <th class="has-text-centered">Description</th>
+        <th class="has-text-centered">Amount</th>
+        <th class="has-text-centered">Rate</th>
+        <th class="has-text-centered">Total</th>
+        <th class="has-text-centered">Vat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @period.invoice_entries.each do |invoice_entry| %>
+        <tr>
+          <td><%= invoice_entry.description %></td>
+          <td class="has-text-centered"><%= invoice_entry.amount %></td>
+          <td class="has-text-right">
+            <%= number_to_currency(invoice_entry.rate, precision: invoice_entry.currency.display_decimals, unit: invoice_entry.currency.symbol) %>
+          </td>
+          <td class="has-text-right">
+            <%= number_to_currency(invoice_entry.rate * invoice_entry.amount,
+              precision: invoice_entry.currency.display_decimals,
+              unit: invoice_entry.currency.symbol) %>
+          </td>
+          <td class="has-text-right">
+            <%= number_to_currency((invoice_entry.vat.to_f / 100) * (invoice_entry.rate * invoice_entry.amount),
+              precision: invoice_entry.currency.display_decimals,
+              unit: invoice_entry.currency.symbol) %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="has-text-right">Net</td>
+        <td class="has-text-right">
+          <%= amount_with_currency(@period, total_period_net(@period)) %>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="has-text-right">VAT</td>
+        <td class="has-text-right">
+          <%= amount_with_currency(@period, total_period_vat(@period)) %>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="has-text-right">Gross</td>
+        <td class="has-text-right">
+          <%= amount_with_currency(@period, total_period_gross(@period)) %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br/>
+
+  <div class="columns shadow-bg is-size-7">
+    <div class="column">
+      <dl>
+        <dt>VAT Summary</dt>
+      </dl>
+    </div>
+    <div class="column">
+      <dl>
+        <dt>Electronic transfers should made to:</dt>
+      </dl>
+    </div>
+  </div>
+  <div class="columns shadow-bg is-size-7">
+    <div class="column">
+      <dl>
+        <dt class="has-text-right">At %</dt>
+        <dt class="has-text-right">At 0%</dt>
+      </dl>
+    </div>
+    <div class="column">
+      <dl>
+        <dt><p class="has-text-right"><%= amount_with_currency(@period, total_period_net(@period)) %></p></dt>
+        <dt><p class="has-text-right"><%= amount_with_currency(@period, total_period_vat(@period)) %></p></dt>
+        <dt><p class="has-text-right"><%= amount_with_currency(@period, total_period_gross(@period)) %></p></dt>
+      </dl>
+    </div>
+    <div class="column is-one-fifth">
+    </div>
+    <div class="colum">
+      <dl>
+        <dt><p class="has-text-right">Account name:<p></dt>
+        <dt><p class="has-text-right">Bank:<p></dt>
+        <dt><p class="has-text-right">Sort Code:<p></dt>
+        <dt><p class="has-text-right">Account Nro:<p></dt>
+        <dt><p class="has-text-right">IBAN:<p></dt>
+        <dt><p class="has-text-right">BIC:<p></dt>
+      </dl>
+    </div>
+    <div class="column">
+      <dl>
+        <dt><%= @company.name %></dt>
+        <% unless @company.bank_account.nil? %>
+          <dt><%= @company.bank_account.name %></dt>
+          <dt><%= @company.bank_account.sort_code %></dt>
+          <dt><%= @company.bank_account.account_number %></dt>
+          <dt><%= @company.bank_account.iban %></dt>
+          <dt><%= @company.bank_account.bic %></dt>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+  <br/>
+
+
+</div>
+
+<footer class="footer">
+  <div class="columns is-size-7">
+    <div class="column">
+      <dl>
+        <dt class="has-text-centered"><div>PAYMENT TERMS: ON PRESENTATION</div></dt>
+        <dt class="has-text-centered"><div>We reserve the right to charge interest on late paid invoices at the percentage rate above bank base rates prevailing under the European Communities (Late Payment on Commercial Transactions) Act 1998</div></dt>
+        <dt class="has-text-centered"><div><%= @company.name %> is registered in <%= @company.address.country %>. Company number: <%= @company.number %></div></dt>
+      </dl>
+    </div>
+  </div>

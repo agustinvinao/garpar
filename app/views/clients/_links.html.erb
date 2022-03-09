@@ -1,0 +1,6 @@
+ <div class="buttons"> 
+  <% items.each do |item| %>
+    <%= link_to item[:title], item[:link], class: "button is-small" %>
+  <% end %>
+  <div class="is-clearfix"></div>
+</div>

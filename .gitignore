@@ -10,7 +10,7 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-*
-/db/seed.rb
+/db/seeds.rb
 /config/database.yml
 
 # Ignore all logfiles and tempfiles.
@@ -41,3 +41,5 @@
 
 # test
 /coverage/*
+
+/data/data.json
