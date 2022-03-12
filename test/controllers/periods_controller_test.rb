@@ -56,6 +56,6 @@ class PeriodsControllerTest < ActionDispatch::IntegrationTest
     get user_company_client_period_path(@user, @company, @client, period, { year: period.year, month: period.month })
     assert_equal 'show', @controller.action_name
     breadcrums = @controller.instance_variable_get(:@breadcrums)
-    assert_equal 6, breadcrums.size
+    assert_equal 7, breadcrums.size
   end
 end

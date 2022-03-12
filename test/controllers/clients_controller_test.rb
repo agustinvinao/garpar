@@ -14,12 +14,6 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user)
   end
 
-  test 'should get index' do
-    get user_company_clients_path(@user, @company)
-    assert_response :success
-    assert_equal 'index', @controller.action_name
-  end
-
   test 'should get show' do
     get user_company_client_path(@user, @company, @client)
     assert_response :success
@@ -32,7 +26,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal 'show', @controller.action_name
     breadcrums = @controller.instance_variable_get(:@breadcrums)
-    assert_equal 4, breadcrums.size
+    assert_equal 5, breadcrums.size
   end
 
   test 'breadcrums - year / month' do
@@ -41,6 +35,6 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal 'show', @controller.action_name
     breadcrums = @controller.instance_variable_get(:@breadcrums)
-    assert_equal 5, breadcrums.size
+    assert_equal 6, breadcrums.size
   end
 end
