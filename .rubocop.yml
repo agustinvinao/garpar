@@ -191,7 +191,7 @@ Lint/NoReturnInBeginEndBlocks: # (new in 1.2)
   Enabled: true
 
 Lint/NumberConversion:
-  Enabled: true
+  Enabled: false
 
 Lint/NumberedParameterAssignment: # (new in 1.9)
   Enabled: true
@@ -386,7 +386,7 @@ Style/MethodCallWithArgsParentheses:
   Enabled: true
 
 Style/MissingElse:
-  Enabled: true
+  Enabled: false
 
 Style/MultilineInPatternThen: # (new in 1.16)
   Enabled: true

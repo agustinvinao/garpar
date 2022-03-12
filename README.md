@@ -27,6 +27,10 @@
   ```
   ````
 
+  ```
+  docker-compose run -e "RAILS_ENV=test" test bundle exec rails test
+  ```
+
 ```
 docker-compose -f docker-compose.yaml -f docker-compose.test.yaml exec web bundle exec rails test
 

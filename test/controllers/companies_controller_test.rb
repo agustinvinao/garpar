@@ -27,10 +27,10 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
     sign_in company.user
     get user_company_path(company.user, company)
     breadcrums = @controller.instance_variable_get(:@breadcrums)
-    assert_equal 2, breadcrums.size
+    assert_equal 3, breadcrums.size
     assert_equal %i[title path current], breadcrums.first.keys
-    assert_equal 'Companies', breadcrums.first[:title]
-    assert_equal user_companies_path(company.user), breadcrums.first[:path]
+    assert_equal 'Companies', breadcrums[1][:title]
+    assert_equal user_companies_path(company.user), breadcrums[1][:path]
     assert breadcrums.last[:current]
   end
 end
